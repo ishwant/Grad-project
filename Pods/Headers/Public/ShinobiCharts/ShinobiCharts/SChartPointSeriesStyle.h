@@ -1,0 +1,1 @@
+../../../../../Frameworks/ShinobiCharts/ShinobiCharts/ShinobiCharts.framework/Headers/SChartPointSeriesStyle.h

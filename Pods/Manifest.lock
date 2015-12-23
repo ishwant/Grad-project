@@ -1,0 +1,65 @@
+PODS:
+  - AFNetworking (2.2.4):
+    - AFNetworking/NSURLConnection (= 2.2.4)
+    - AFNetworking/NSURLSession (= 2.2.4)
+    - AFNetworking/Reachability (= 2.2.4)
+    - AFNetworking/Security (= 2.2.4)
+    - AFNetworking/Serialization (= 2.2.4)
+    - AFNetworking/UIKit (= 2.2.4)
+  - AFNetworking/NSURLConnection (2.2.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.4):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Dropbox-Sync-API-SDK (2.0.3)
+  - FXBlurView (1.5.6)
+  - GoogleAnalytics-iOS-SDK (3.0.7)
+  - HockeySDK (3.5.5)
+  - MBProgressHUD (0.8)
+  - Reachability (3.1.1)
+  - REFrostedViewController (2.4.5)
+  - ShinobiCharts (2.8.2)
+  - SSKeychain (1.2.2)
+  - TPKeyboardAvoiding (1.2.3)
+  - UAAppReviewManager (0.2.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.0)
+  - Dropbox-Sync-API-SDK (~> 2.0.3)
+  - FXBlurView (~> 1.5.3)
+  - GoogleAnalytics-iOS-SDK (~> 3.0.3)
+  - HockeySDK (~> 3.5.2)
+  - MBProgressHUD (~> 0.8)
+  - Reachability (~> 3.1.1)
+  - REFrostedViewController (~> 2.4.2)
+  - ShinobiCharts (from `Frameworks/ShinobiCharts/`)
+  - SSKeychain (~> 1.2.1)
+  - TPKeyboardAvoiding (~> 1.2.2)
+  - UAAppReviewManager (~> 0.2.1)
+
+EXTERNAL SOURCES:
+  ShinobiCharts:
+    :path: Frameworks/ShinobiCharts/
+
+SPEC CHECKSUMS:
+  AFNetworking: caca0799b310f0c3bf1fc1af45145fc96972bcab
+  Dropbox-Sync-API-SDK: b7b085d7d33e0b76d61c66055a36c463b55c27ba
+  FXBlurView: c1a10ef49a1eb9e9f35fe4c80ee923dd9ca3e46b
+  GoogleAnalytics-iOS-SDK: 8737363000dd5ba8ba20efd90bcfb730ca22bc2d
+  HockeySDK: 944f2339ff21d8f594030f3af12103922e810579
+  MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
+  REFrostedViewController: c7613f3fb109797e980522f6b0e9f7f82edcdaf4
+  ShinobiCharts: b195eb01fa2094fa9a34d72e3034a677015b3efa
+  SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
+  TPKeyboardAvoiding: ab1760b9813202b5a570a2cef4b4404ef36b50c5
+  UAAppReviewManager: 69a414548b6ffa251ae2493ecfbb72fcc088729d
+
+COCOAPODS: 0.39.0
