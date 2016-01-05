@@ -9,16 +9,16 @@
 #import "UserProfile.h"
 
 @implementation UserProfile
-@synthesize userId, userName, userPassword;
+@synthesize userToken, userFName, userLName;
 
--(id)initWithUserName : (NSString *)uName anduserPassword: (NSString *)uPass anduserID : (NSString *)uID
+-(id)initWithuserFName : (NSString *)uFName anduserLName: (NSString *)uLName anduserToken: (NSString *)uToken
 {
     self = [super init];
     if(self)
     {
-        userId = uID;
-        userName = uName;
-        userPassword = uPass;
+        userFName = uFName;
+        userLName = uLName;
+        userToken = uToken;
     }
     return self;
 }

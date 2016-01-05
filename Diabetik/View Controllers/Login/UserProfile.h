@@ -10,13 +10,13 @@
 
 @interface UserProfile : NSObject
 
-@property (strong, nonatomic) NSString *userId;
-@property (strong, nonatomic) NSString *userName;
-@property (strong, nonatomic) NSString *userPassword;
+@property (strong, nonatomic) NSString *userToken;
+@property (strong, nonatomic) NSString *userFName;
+@property (strong, nonatomic) NSString *userLName;
 
 #pragma mark -
 #pragma mark Class Methods
 
--(id)initWithUserName : (NSString *)uName anduserPassword: (NSString *)uPass anduserID : (NSString *)uID;
+-(id)initWithuserFName : (NSString *)uFName anduserLName: (NSString *)uLName anduserToken: (NSString *)uToken;
 
 @end

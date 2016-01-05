@@ -11,10 +11,10 @@
 
 
 @interface LoginController: UIViewController {
-    IBOutlet UITextField *userNameField;
-    IBOutlet UITextField *passwordField;
+    IBOutlet UITextField *userFNameField;
+    IBOutlet UITextField *userLNameField;
+    IBOutlet UITextField *userTokenField;
     NSDictionary *infoDictionary;
-//@public    KeychainItemWrapper *keychain;
 }
 
 //@property (strong, nonatomic) UIViewController *viewController;
