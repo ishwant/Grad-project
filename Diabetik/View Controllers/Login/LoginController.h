@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *usersArray;
 @property (nonatomic, strong) NSMutableArray *jsonArray;
 @property (nonatomic, assign) BOOL *userCanLogin;
+@property (nonatomic,retain) UIAlertView *alertView;
 
 #pragma  mark -
 #pragma  mark Class Methods

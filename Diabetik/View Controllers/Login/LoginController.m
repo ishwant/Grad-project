@@ -19,48 +19,28 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 //static NSString* const kBaseURL = @"http://localhost:3000/userdb";
 
 @implementation LoginController
-@synthesize  usersArray, jsonArray, userCanLogin;
+@synthesize  usersArray, jsonArray, userCanLogin, alertView;
 
 -(IBAction)loginButtonTapped:(id)sender{
     
-    [self retrieveData];
-    
-    NSInteger index = 0;
-    UserProfile *loginuser = [usersArray objectAtIndex:index];
-    
-    if ([userFNameField.text isEqualToString:loginuser.userFName]) {
-        if ([userLNameField.text isEqualToString:loginuser.userLName]) {
-            NSLog(@"if statement is TRUE");
-            userCanLogin = true;
+    NSLog(@"ENTERING");
+    if(![userTokenField hasText] || ![userFNameField hasText] || ![userLNameField hasText]){
+        alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete entries" message:@"Please fill all the details" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        
+        [alertView show];
+    }
+    else {
+        [self retrieveData];
+        
+        if(userCanLogin){
+            [SSKeychain setPassword:[userTokenField text] forService:@"graduateProject" account:[userFNameField text]];
             
-            [SSKeychain setPassword:[userTokenField text]
-                         forService:@"graduateProject"
-                            account:[userFNameField text]];
-            
- //           UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Correct Password" message:@"The password is correct" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-            
-       //     [alert1 show];
-            
-            //change to tabviewcontroller
-            
-            UAAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            UAAppDelegate *appDelegate = (UAAppDelegate *)[[UIApplication sharedApplication] delegate];
             [appDelegate.window setRootViewController:appDelegate.viewController];
         }
-        else{
-            NSLog(@"if statement is FALSE");
-            UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"Invalid Details" message:@"Incorrect Token/User Name, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-            
-            [alert2 show];
-        }        
     }
-    else{
-        NSLog(@"if statement is FALSE");
-        UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"Invalid Details" message:@"Incorrect Token/User Name, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        
-        [alert2 show];
-    }
-    
-    
+  
+
 /*     NSInteger index = 0;
     UserProfile *loginuser = [usersArray objectAtIndex:index];
     
@@ -140,6 +120,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
         NSLog(@"YES, CAN CONVERT ");
         
         NSError *error;
+        
         NSData* json_to_send = [NSJSONSerialization dataWithJSONObject: info options:NSJSONWritingPrettyPrinted error: &error];
         
         [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[json_to_send length]] forHTTPHeaderField:@"Content-length"];
@@ -149,25 +130,46 @@ static NSString* const kBaseURL = @"http://localhost:8080";
         NSHTTPURLResponse *response = nil;
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request
                                                 returningResponse:&response
-                                                            error:&requestError];
+                                                            error:&requestError];       
         
-        
-        
-        NSArray *jsonResponseData = [NSJSONSerialization
+        NSDictionary *jsonResponseData = [NSJSONSerialization
                                           JSONObjectWithData:responseData
-                                            options:NSJSONReadingMutableContainers error:nil];
+                                            options:NSJSONReadingMutableContainers error:&error];
         
         NSLog(@"%@",jsonResponseData);
+        if(error != NULL){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connectivity error" message:@"Check network connection, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [alert show];
+        }
+        else {
+            usersArray = [[NSMutableArray alloc] init];
+            
+            if([[jsonResponseData  objectForKey:@"status"]  isEqualToString: @"SUCCESS"]){
+                
+                NSString * ufname = userFNameField.text;
+                
+                NSString * ulname = userLNameField.text;
+                
+                NSString * utoken = userTokenField.text;
+                
+                //Add the user object to our users array
+                [usersArray addObject:[[UserProfile alloc]initWithuserFName:ufname anduserLName:ulname anduserToken:utoken]];
+                
+                userCanLogin = true;
+            }
+            else if ([[jsonResponseData objectForKey:@"status"] isEqualToString:@"FAIL"] &&
+                     [[jsonResponseData objectForKey:@"message"] isEqualToString:@"Token not found"]){
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Token" message:@"The token is invalid, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                [alert show];
+            }
+            else if([[jsonResponseData objectForKey:@"status"] isEqualToString:@"FAIL"] &&
+                    [[jsonResponseData objectForKey:@"message"] isEqualToString:@"User Incorrect"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid User" message:@"The user name is invalid, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
         
-        usersArray = [[NSMutableArray alloc] init];
-        NSString * ufname = [[jsonResponseData objectAtIndex:0] objectForKey:@"first_name"];
-        NSLog(@"%@",ufname);
-        NSString * ulname = [[jsonResponseData objectAtIndex:0] objectForKey:@"last_name"];
-        NSLog(@"%@",ulname);
-        NSString * utoken = [[jsonResponseData objectAtIndex:0] objectForKey:@"token"];
-        
-        //Add the user object to our users array
-        [usersArray addObject:[[UserProfile alloc]initWithuserFName:ufname anduserLName:ulname anduserToken:utoken]];
         
     } else{
         NSLog(@"NO, CAN'T CONVERT ");
