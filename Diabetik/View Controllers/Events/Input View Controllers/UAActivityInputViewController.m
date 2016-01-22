@@ -23,7 +23,7 @@
 #define kDatePickerViewTag 1
 #define kToolbarViewTag 2
 #define kNameInputControlTag 3
-#define kMinutesInputControlTag 4
+#define kMinutesInputControlTag 4f
 #define kDateInputControlTag 5
 #define kIconTag 6
 

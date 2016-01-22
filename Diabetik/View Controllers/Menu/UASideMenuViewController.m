@@ -31,6 +31,8 @@
 #import "UAInsulinCalculatorViewController.h"
 #import "UATagsViewController.h"
 #import "UAInsightsViewController.h"
+#import "ShareViewController.h"
+#import "SelectPostViewController.h"
 
 #import "UASideMenuCell.h"
 
@@ -107,7 +109,11 @@
 {
     if(section == 0)
     {
-        return 7;
+        //OLD
+        //return 7;
+        
+        //NEW
+        return 8;
     }
     else if(section == 1)
     {
@@ -152,29 +158,35 @@
         }
         else if(indexPath.row == 2)
         {
+            cell.textLabel.text = NSLocalizedString(@"Share", nil);
+            cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconExport"];
+            cell.accessoryIcon.highlightedImage = [UIImage imageNamed:@"ListMenuIconExportHighlighted"];
+        }
+        else if(indexPath.row == 3)
+        {
             cell.textLabel.text = NSLocalizedString(@"Insulin Calculator", nil);
             cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconCalculator"];
             cell.accessoryIcon.highlightedImage = [UIImage imageNamed:@"ListMenuIconCalculatorHighlighted"];
         }
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 4)
         {
             cell.textLabel.text = NSLocalizedString(@"Tags", nil);
             cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconTags"];
             cell.accessoryIcon.highlightedImage = [UIImage imageNamed:@"ListMenuIconTagsHighlighted"];
         }
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 5)
         {
             cell.textLabel.text = NSLocalizedString(@"Reminders", nil);
             cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconReminders"];
             cell.accessoryIcon.highlightedImage = [UIImage imageNamed:@"ListMenuIconRemindersHighlighted"];
         }
-        else if(indexPath.row == 5)
+        else if(indexPath.row == 6)
         {
             cell.textLabel.text = NSLocalizedString(@"Export", @"Menu item to take users to the export screen");
             cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconExport"];
             cell.accessoryIcon.highlightedImage = [UIImage imageNamed:@"ListMenuIconExportHighlighted"];
         }
-        else if(indexPath.row == 6)
+        else if(indexPath.row == 7)
         {
             cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.accessoryIcon.image = [UIImage imageNamed:@"ListMenuIconSettings"];
@@ -282,13 +294,28 @@
         }
         else if(indexPath.row == 2)
         {
+            if(![[navigationController topViewController] isKindOfClass:[SelectPostViewController class]])
+            {
+                SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
+            //    SelectPostViewController *vc = [[SelectPostViewController alloc] init];
+                [navigationController pushViewController:vc animated:animateViewControllerChange];
+            }
+          /*  if(![[navigationController topViewController] isKindOfClass:[ShareViewController class]])
+            {
+                ShareViewController *vc = [[ShareViewController alloc] init];
+                [navigationController pushViewController:vc animated:animateViewControllerChange];
+            } 
+         */
+        }
+        else if(indexPath.row == 3)
+        {
             if(![[navigationController topViewController] isKindOfClass:[UAInsulinCalculatorViewController class]])
             {
                 UAInsulinCalculatorViewController *vc = [[UAInsulinCalculatorViewController alloc] init];
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }
         }
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 4)
         {
             if(![[navigationController topViewController] isKindOfClass:[UATagsViewController class]])
             {
@@ -296,7 +323,7 @@
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }
         }
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 5)
         {
             if(![[navigationController topViewController] isKindOfClass:[UARemindersViewController class]])
             {
@@ -304,7 +331,7 @@
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }
         }
-        else if(indexPath.row == 5)
+        else if(indexPath.row == 6)
         {
             if(![[navigationController topViewController] isKindOfClass:[UAExportViewController class]])
             {
@@ -312,7 +339,7 @@
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }
         }
-        else if(indexPath.row == 6)
+        else if(indexPath.row == 7)
         {
             if(![[navigationController topViewController] isKindOfClass:[UASettingsViewController class]])
             {

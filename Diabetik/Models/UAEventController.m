@@ -115,7 +115,7 @@
                     else
                     {
                         // Did this event happen within 3 hours (irrespective of date) from the current time?
-                        if(fabs(eventHour-currentHour) <= numberOfSegments-1)
+                        if(labs(eventHour-currentHour) <= numberOfSegments-1)
                         {
                             NSMutableArray *existingEvents = [previousEvents objectAtIndex:[[event type] integerValue]];
                             [existingEvents addObject:event];

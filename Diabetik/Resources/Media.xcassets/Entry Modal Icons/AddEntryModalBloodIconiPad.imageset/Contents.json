@@ -2,13 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "AddEntryModalBloodIconiPad.png"
+      "filename" : "AddEntryModalBloodIconiPad.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "AddEntryModalBloodIconiPad@2x.png"
+      "filename" : "AddEntryModalBloodIconiPad@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

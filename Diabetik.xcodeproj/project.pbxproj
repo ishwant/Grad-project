@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		09EEE651810D4526B17A8AEB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBEE407F98E74807B5E3E8FD /* libPods.a */; };
+		111BCF491C4C793E0066BA67 /* SelectPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BCF471C4C793E0066BA67 /* SelectPostViewController.m */; };
+		111BCF4E1C4DBC730066BA67 /* SelectPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */; };
+		117FC7A41C4493F4006E92BE /* TESTEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC7A31C4493F4006E92BE /* TESTEvent.m */; };
+		117FC8091C49958A006E92BE /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117FC8061C49958A006E92BE /* ShareViewController.xib */; };
+		117FC80A1C49958A006E92BE /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC8071C49958A006E92BE /* ShareViewController.m */; };
 		118906E21C14239000F61D1B /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118906E01C14239000F61D1B /* LoginController.m */; };
 		118906E31C14239000F61D1B /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118906E11C14239000F61D1B /* LoginController.xib */; };
 		118906E61C1423F200F61D1B /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 118906E51C1423F200F61D1B /* UserProfile.m */; };
@@ -282,6 +287,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		111BCF461C4C793E0066BA67 /* SelectPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectPostViewController.h; path = Sharing/SelectPostViewController.h; sourceTree = "<group>"; };
+		111BCF471C4C793E0066BA67 /* SelectPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectPostViewController.m; path = Sharing/SelectPostViewController.m; sourceTree = "<group>"; };
+		111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelectPostViewController.xib; path = Sharing/SelectPostViewController.xib; sourceTree = "<group>"; };
+		117FC7A21C4493F4006E92BE /* TESTEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TESTEvent.h; path = Sharing/TESTEvent.h; sourceTree = "<group>"; };
+		117FC7A31C4493F4006E92BE /* TESTEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TESTEvent.m; path = Sharing/TESTEvent.m; sourceTree = "<group>"; };
+		117FC8061C49958A006E92BE /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Sharing/ShareViewController.xib; sourceTree = "<group>"; };
+		117FC8071C49958A006E92BE /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = Sharing/ShareViewController.m; sourceTree = "<group>"; };
+		117FC8081C49958A006E92BE /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Sharing/ShareViewController.h; sourceTree = "<group>"; };
 		118906DF1C14239000F61D1B /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = Login/LoginController.h; sourceTree = "<group>"; };
 		118906E01C14239000F61D1B /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Login/LoginController.m; sourceTree = "<group>"; };
 		118906E11C14239000F61D1B /* LoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginController.xib; path = Login/LoginController.xib; sourceTree = "<group>"; };
@@ -728,6 +741,14 @@
 		117FC7491C436A43006E92BE /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				117FC8061C49958A006E92BE /* ShareViewController.xib */,
+				117FC8071C49958A006E92BE /* ShareViewController.m */,
+				117FC8081C49958A006E92BE /* ShareViewController.h */,
+				117FC7A21C4493F4006E92BE /* TESTEvent.h */,
+				117FC7A31C4493F4006E92BE /* TESTEvent.m */,
+				111BCF461C4C793E0066BA67 /* SelectPostViewController.h */,
+				111BCF471C4C793E0066BA67 /* SelectPostViewController.m */,
+				111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -1801,6 +1822,7 @@
 			files = (
 				53438AE31901799400E2B2E1 /* UAAppReviewManager-License.txt in Resources */,
 				533F33001773266600AD89E2 /* Localizable.strings in Resources */,
+				111BCF4E1C4DBC730066BA67 /* SelectPostViewController.xib in Resources */,
 				533F33041773266600AD89E2 /* OpenSans-Bold.ttf in Resources */,
 				533F33051773266600AD89E2 /* OpenSans-BoldItalic.ttf in Resources */,
 				533F33061773266600AD89E2 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -1809,6 +1831,7 @@
 				533F33091773266600AD89E2 /* OpenSans-Light.ttf in Resources */,
 				533F330A1773266600AD89E2 /* OpenSans-LightItalic.ttf in Resources */,
 				533F330B1773266600AD89E2 /* OpenSans-Regular.ttf in Resources */,
+				117FC8091C49958A006E92BE /* ShareViewController.xib in Resources */,
 				533F330C1773266600AD89E2 /* OpenSans-Semibold.ttf in Resources */,
 				53438AE21901799400E2B2E1 /* LXReorderableCollectionViewFlowLayout-License.txt in Resources */,
 				53895269189FA19D00C8C3C8 /* MBProgressHUD-License.txt in Resources */,
@@ -1972,12 +1995,14 @@
 				53F78EDA18422B5B006736F5 /* UIImage+AspectFit.m in Sources */,
 				5330A26B18AAC7E200000A47 /* UAInputParentViewController.m in Sources */,
 				538A282A190024DD0083D124 /* UASummaryWidgetListViewController.m in Sources */,
+				117FC80A1C49958A006E92BE /* ShareViewController.m in Sources */,
 				533F32F61773266600AD89E2 /* UAEvent.m in Sources */,
 				5330A28818AAC9B800000A47 /* UAEventInputTextViewViewCell.m in Sources */,
 				533F32F71773266600AD89E2 /* UAManagedObject.m in Sources */,
 				533F32F81773266600AD89E2 /* UAMeal.m in Sources */,
 				533F32F91773266600AD89E2 /* UAMedicine.m in Sources */,
 				533F32FA1773266600AD89E2 /* UANote.m in Sources */,
+				117FC7A41C4493F4006E92BE /* TESTEvent.m in Sources */,
 				539664D018563A3D00AD1842 /* Diabetik_1.2_to_1.3.xcmappingmodel in Sources */,
 				533F32FB1773266600AD89E2 /* UAReading.m in Sources */,
 				533F32FC1773266600AD89E2 /* UAReminder.m in Sources */,
@@ -2074,6 +2099,7 @@
 				533F352517736C0600AD89E2 /* UAEventController.m in Sources */,
 				533F352717736C0600AD89E2 /* UALocationController.m in Sources */,
 				533F352817736C0600AD89E2 /* UAMediaController.m in Sources */,
+				111BCF491C4C793E0066BA67 /* SelectPostViewController.m in Sources */,
 				533255651892E29400D28C34 /* UATagHighlightTextStorage.m in Sources */,
 				5330A28D18AAC9B800000A47 /* UANavPaginationTitleView.m in Sources */,
 				533F352917736C0600AD89E2 /* UAReminderController.m in Sources */,

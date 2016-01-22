@@ -23,6 +23,7 @@
 #import <UAAppReviewManager/UAAppReviewManager.h>
 #import "GAI.h"
 #import "SSKeychainQuery.h"
+#import "ShareViewController.h"
 
 
 #import "UAHelper.h"
@@ -32,6 +33,7 @@
 #import "LoginController.h"
 #import "SSKeychain.h"
 #import "SSKeychainquery.h"
+
 
 #import "UAReminderController.h"
 #import "UALocationController.h"
@@ -168,15 +170,19 @@
          NSLog(@"%@", userPwd);
     }
 
+ //   TESTTableViewController *testtableviewcontroller = [[TESTTableViewController alloc] init];
     NSLog(@"password");
     NSLog(@"%@", userPwd);
-    
+    NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     if(userPwd==nil){
         NSLog(@"Login is the ROOT");
         [self.window setRootViewController:loginController];
     } else {
         NSLog(@"TabView is the ROOT");
+        ShareViewController *ShareViewConroller = [[ShareViewController alloc] init];
+      //  self.window.rootViewController = ShareViewController;
         [self.window setRootViewController:self.viewController];
+      //  self.window.rootViewController = testtableviewcontroller;
     }
     
     
