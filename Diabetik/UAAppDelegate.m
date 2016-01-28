@@ -179,10 +179,8 @@
         [self.window setRootViewController:loginController];
     } else {
         NSLog(@"TabView is the ROOT");
-        ShareViewController *ShareViewConroller = [[ShareViewController alloc] init];
-      //  self.window.rootViewController = ShareViewController;
         [self.window setRootViewController:self.viewController];
-      //  self.window.rootViewController = testtableviewcontroller;
+
     }
     
     

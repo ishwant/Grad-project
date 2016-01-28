@@ -12,6 +12,7 @@
 
 @interface SelectPostViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITextField *categoryField;
 @property (strong, nonatomic) IBOutlet UITextField *startDateField;
 @property (strong, nonatomic) IBOutlet UITextField *endDateField;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) NSDate *searchStartDate;
 @property (strong, nonatomic) NSDate *searchEndDate;
+@property (strong, nonatomic) NSMutableArray *categories;
 
 @property (nonatomic,retain) UIAlertView *alertView;
 

@@ -33,7 +33,7 @@
 #import "UAInsightsViewController.h"
 #import "ShareViewController.h"
 #import "SelectPostViewController.h"
-
+#import "MainShareController.h"
 #import "UASideMenuCell.h"
 
 @interface UASideMenuViewController ()
@@ -296,16 +296,11 @@
         {
             if(![[navigationController topViewController] isKindOfClass:[SelectPostViewController class]])
             {
-                SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
-            //    SelectPostViewController *vc = [[SelectPostViewController alloc] init];
+             //   SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
+                MainShareController *vc = [[MainShareController alloc] init];
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }
-          /*  if(![[navigationController topViewController] isKindOfClass:[ShareViewController class]])
-            {
-                ShareViewController *vc = [[ShareViewController alloc] init];
-                [navigationController pushViewController:vc animated:animateViewControllerChange];
-            } 
-         */
+
         }
         else if(indexPath.row == 3)
         {

@@ -1,7 +1,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "TESTEvent.h"
+#import "CoreEvent.h"
 
 @interface ShareViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
@@ -14,7 +14,15 @@
 @property (strong, nonatomic) NSDate *searchStartDate;
 @property (strong, nonatomic) NSDate *searchEndDate;
 
+@property (strong, nonatomic) IBOutlet UITextField *messageField;
+
 #pragma mark - Methods
 - (void) retrieveData;
-- (bool *) postData:(TESTEvent *)currEvent;
+- (void) retrieveMedicineData;
+- (void) retrieveActivityData;
+- (void) retrieveMealData;
+- (void) retrieveReadingData;
+- (void) retrieveNotesData;
+
+- (bool *) postData:(CoreEvent *)currEvent;
 @end

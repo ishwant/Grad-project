@@ -12,7 +12,8 @@
 #import "ShareViewController.h"
 
 @implementation SelectPostViewController
-@synthesize  categoryField, startDateField, endDateField, searchPostButton;
+@synthesize  categoryField, startDateField, endDateField, searchPostButton, categories;
+@synthesize tableView = _tableView;
 
 //INITIAL SETUP
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,12 +40,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 10;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,6 +64,21 @@
     if (indexPath.row == 0){
         
         _datePicker.hidden = YES;
+        
+   /*     UIButton *medicineButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 20, 50, 15)];
+        [medicineButton setImage:[UIImage imageNamed:@"AddEntryModalMedicineIcon.png"] forState:UIControlStateNormal];
+        [medicineButton setTitle:NSLocalizedString(@"Medication", nil) forState:UIControlStateNormal];
+        [medicineButton addTarget:self action:@selector(selectedOption:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell addSubview:medicineButton];
+        
+        UIButton *readingButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 20, 50, 15)];
+        [readingButton setImage:[UIImage imageNamed:@"AddEntryModalBloodIcon.png"] forState:UIControlStateNormal];
+        [readingButton setTitle:NSLocalizedString(@"Reading", @"Blood glucose reading entry type") forState:UIControlStateNormal];
+        [readingButton addTarget:self action:@selector(selectedOption:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell addSubview:readingButton]; */
+        
         self.categoryField = [[UITextField alloc] initWithFrame:CGRectMake(65, 20, 200, 30)];
         self.categoryField.placeholder = @"Select Category";
         self.categoryField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -117,7 +137,7 @@
 -(IBAction)searchPostButtonTapped:(id)sender{
     
     NSLog(@"ENTERING");
-    
+
     if(![categoryField hasText] || ![startDateField hasText] || ![endDateField hasText]){
         self.alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete entries" message:@"Please fill all the details" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
         
@@ -143,10 +163,10 @@
         comps1.minute = 59;
         comps1.second = 59;
         self.searchEndDate = [calendar dateFromComponents:comps1];
-        
+
         //Push view controller
         ShareViewController *vc = [[ShareViewController alloc] init];
-        vc.searchCategory = categoryField.text;
+        vc.searchCategory = @"All";
         vc.searchStartDate = self.searchStartDate;
         vc.searchEndDate = self.searchEndDate;
         [[self navigationController] pushViewController:vc animated:YES];
