@@ -13,10 +13,10 @@
 @interface SelectPostViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITextField *categoryField;
+
 @property (strong, nonatomic) IBOutlet UITextField *startDateField;
 @property (strong, nonatomic) IBOutlet UITextField *endDateField;
-@property (strong, nonatomic) IBOutlet UIButton *searchPostButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *searchPostButton;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) NSDate *searchStartDate;

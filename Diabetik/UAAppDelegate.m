@@ -167,7 +167,8 @@
      //   userPwd=[SSKeychain passwordForService:@"graduateProject" account:[userAccounts objectAtIndex:i]: [acct]];
          userPwd = [SSKeychain passwordForService:@"graduateProject" account:[userAccounts objectAtIndex:i ][kSSKeychainAccountKey]];
        //  userPwd=[SSKeychain passwordForService:@"graduateProject" account:@"u1"];
-         NSLog(@"%@", userPwd);
+         NSLog(@"%d", i);
+         
     }
 
  //   TESTTableViewController *testtableviewcontroller = [[TESTTableViewController alloc] init];

@@ -7,6 +7,9 @@
 //
 
 #import "ShareMessageViewController.h"
+#import "MainShareController.h"
+
+static NSString* const kBaseURL = @"http://localhost:8080";
 
 @interface ShareMessageViewController ()
 
@@ -16,6 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@""
+                                             style:UIBarButtonItemStylePlain
+                                             target:nil
+                                             action:nil];
     NSLog(@"ShareMessageViewController loading");
     self.title = @"Send Message";
     // Do any additional setup after loading the view from its nib.
@@ -65,11 +73,87 @@
         
         [cell addSubview:self.sendMessageButton];
     }
+    [cell setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f]];
     return cell;
 }
 
 -(IBAction)sendMessageButtonTapped:(id)sender{
     NSLog(@"send message button tapped");
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                    initWithURL:[NSURL
+                                                 URLWithString:[kBaseURL stringByAppendingPathComponent:@"/message"]]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    
+    //build an info object and convert to json
+    
+    NSLog(@"Entered message: %@", self.textMessageField.text);
+    
+    NSArray *userAccounts = [SSKeychain accountsForService:@"graduateProject"];
+    NSString *loggedInUserToken = [SSKeychain passwordForService:@"graduateProject" account:[userAccounts objectAtIndex:0][kSSKeychainAccountKey]];
+    
+    NSDictionary *messageToShare = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 loggedInUserToken, @"UserToken",
+                                 self.textMessageField.text, @"message",
+                                 nil];
+    
+    //convert object to data
+    NSLog(@"%@", messageToShare);
+    
+    if([NSJSONSerialization isValidJSONObject:messageToShare]){
+        
+        NSLog(@"YES, CAN CONVERT ");
+        
+        NSError *error;
+        
+        NSData* json_to_send = [NSJSONSerialization dataWithJSONObject: messageToShare options:NSJSONWritingPrettyPrinted error: &error];
+        
+        [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[json_to_send length]] forHTTPHeaderField:@"Content-length"];
+        request.HTTPBody = json_to_send;
+        
+        NSError *requestError = [[NSError alloc] init];
+        NSHTTPURLResponse *response = nil;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request
+                                                     returningResponse:&response
+                                                                 error:&requestError];
+        
+        NSDictionary *jsonResponseData = [NSJSONSerialization
+                                          JSONObjectWithData:responseData
+                                          options:NSJSONReadingMutableContainers error:&error];
+        
+        NSLog(@"%@",jsonResponseData);
+        if(error != NULL){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connectivity error" message:@"Check network connection, Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [alert show];
+        }
+        else {
+            NSLog(@"Connection for post is established");
+            
+            if([[jsonResponseData  objectForKey:@"status"]  isEqualToString: @"SUCCESS"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SUCCESS" message:@"Message sent!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                
+            }
+            else if([[jsonResponseData objectForKey:@"status"] isEqualToString:@"FAIL"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Something went wrong, Try Again!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                
+            }
+        }
+        
+        
+    } else{
+        NSLog(@"NO, CAN'T CONVERT ");
+    }    
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [[self navigationController] popToRootViewControllerAnimated:YES];
+    }
 
+}
 @end

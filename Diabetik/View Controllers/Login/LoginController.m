@@ -11,12 +11,13 @@
 #import "LoginController.h"
 #import "UserProfile.h"
 #import "UAAppDelegate.h"
+#import <CoreData/CoreData.h>
 
+#import "FBEncryptorAES.h"
 
 
 //==Trying to add sign-up
 static NSString* const kBaseURL = @"http://localhost:8080";
-//static NSString* const kBaseURL = @"http://localhost:3000/userdb";
 
 @implementation LoginController
 @synthesize  usersArray, jsonArray, userCanLogin, alertView;
@@ -101,19 +102,30 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
                                     initWithURL:[NSURL
-                                                 URLWithString:[kBaseURL stringByAppendingPathComponent:@"/signup"]]];
+                                                 URLWithString:[kBaseURL stringByAppendingPathComponent:@"/appsignup"]]];
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    
+    
+    
+    //ENCRYPT TOKEN
+    NSString *encryptedToken= [FBEncryptorAES encryptBase64String:enteredUserToken
+                                                    keyString:enteredUserFName
+                                                separateLines:NO];
+    NSLog(@"encrypted: %@", encryptedToken);
+
+    
     
     //build an info object and convert to json
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                           enteredUserFName, @"userFName",
                           enteredUserLName, @"userLName",
-                          enteredUserToken, @"userToken",
+                          encryptedToken, @"userToken",
                           nil];
     
     //convert object to data
+    NSLog(@"%@",info);
     
     if([NSJSONSerialization isValidJSONObject:info]){
         
@@ -156,6 +168,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                 [usersArray addObject:[[UserProfile alloc]initWithuserFName:ufname anduserLName:ulname anduserToken:utoken]];
                 
                 userCanLogin = true;
+                
             }
             else if ([[jsonResponseData objectForKey:@"status"] isEqualToString:@"FAIL"] &&
                      [[jsonResponseData objectForKey:@"message"] isEqualToString:@"Token not found"]){

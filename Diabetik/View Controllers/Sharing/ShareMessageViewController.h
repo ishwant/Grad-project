@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShareMessageViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ShareMessageViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *sendMessageButton;

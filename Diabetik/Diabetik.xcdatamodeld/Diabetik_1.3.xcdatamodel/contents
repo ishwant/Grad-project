@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A598" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="UAActivity" representedClassName="UAActivity" parentEntity="UAEvent" syncable="YES">
         <attribute name="minutes" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
@@ -20,6 +20,9 @@
         <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UATag" inverseName="events" inverseEntity="UATag" syncable="YES"/>
+    </entity>
+    <entity name="UAID" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="UAMeal" representedClassName="UAMeal" parentEntity="UAEvent" syncable="YES">
         <attribute name="grams" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -68,11 +71,12 @@
         <element name="UAEvent" positionX="-1125" positionY="-156" width="128" height="208"/>
         <element name="UAMeal" positionX="-693" positionY="-307" width="128" height="75"/>
         <element name="UAMedicine" positionX="-1127" positionY="-306" width="128" height="75"/>
-        <element name="UANote" positionX="-551" positionY="-306" width="128" height="43"/>
+        <element name="UANote" positionX="-551" positionY="-306" width="128" height="45"/>
         <element name="UAReading" positionX="-837" positionY="-306" width="128" height="75"/>
         <element name="UAReminder" positionX="-740" positionY="-162" width="128" height="193"/>
         <element name="UAReminderRule" positionX="-576" positionY="-162" width="128" height="103"/>
         <element name="UARunKeeperAccount" positionX="-893" positionY="-61" width="128" height="88"/>
         <element name="UATag" positionX="-1127" positionY="108" width="128" height="90"/>
+        <element name="UAID" positionX="-945" positionY="-162" width="128" height="60"/>
     </elements>
 </model>

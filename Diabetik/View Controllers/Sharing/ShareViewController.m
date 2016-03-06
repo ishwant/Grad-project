@@ -6,6 +6,9 @@
 #import "UAMeal.h"
 #import "UAReading.h"
 #import "UANote.h"
+#import "EventDetailsTableViewController.h"
+
+#import "FBEncryptorAES.h"
 
 static NSString* const kBaseURL = @"http://localhost:8080";
 
@@ -14,7 +17,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 @end
 
 @implementation ShareViewController
-@synthesize tableData,tableViewObject, messageField, searchCategory;
+@synthesize tableData,tableViewObject, messageField, searchCategory, loggedInUserToken;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,42 +31,48 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@""
+                                             style:UIBarButtonItemStylePlain
+                                             target:nil
+                                             action:nil];
     self.tableViewObject.allowsMultipleSelection = YES;
     NSLog(@"ShareViewController loading");
     self.title = @"SHARE";
- //   tableData = [[NSMutableArray alloc] initWithObjects:@"One",@"Two",@"Three",@"Four",@"Five",@"Six",@"Seven",@"Eight",@"Nine",@"Ten",nil];
+    
     tableData = [[NSMutableArray alloc] init];
+    self.selectedEvents = [[NSMutableArray alloc] init];
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"SEND"
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(postButtonTapped:)];
     self.navigationItem.rightBarButtonItem = postButton;
-    //[postButton release];
+    
+    NSArray *userAccounts = [SSKeychain accountsForService:@"graduateProject"];
+    loggedInUserToken = [SSKeychain passwordForService:@"graduateProject" account:[userAccounts objectAtIndex:0][kSSKeychainAccountKey]];
+    
+    for (id searchCat in searchCategory) {
+        NSLog(@"%@", searchCat);
+        
+        if ([searchCat isEqualToString:@"Medication"]){
+            [self retrieveMedicineData];
+        }
+        else if ([searchCat isEqualToString:@"Activity"]){
+            [self retrieveActivityData];
+        }
+        else if ([searchCat isEqualToString:@"Food"]){
+            [self retrieveMealData];
+        }
+        else if ([searchCat isEqualToString:@"Reading"]){
+            [self retrieveReadingData];
+        }
+        else if ([searchCat isEqualToString:@"Note"]){
+            [self retrieveNotesData];
+        }
+    }
     
 //UNCHECK    [self retrieveData];
-    if([searchCategory  isEqual: @"All"]){
-        [self retrieveMedicineData];
-        [self retrieveActivityData];
-        [self retrieveMealData];
-        [self retrieveReadingData];
-        [self retrieveNotesData];
-    }
-    else if ([searchCategory isEqualToString:@"Medication"]){
-        [self retrieveMedicineData];
-    }
-    else if ([searchCategory isEqualToString:@"Activity"]){
-        [self retrieveActivityData];
-    }
-    else if ([searchCategory isEqualToString:@"Food"]){
-        [self retrieveMealData];
-    }
-    else if ([searchCategory isEqualToString:@"Reading"]){
-        [self retrieveReadingData];
-    }
-    else if ([searchCategory isEqualToString:@"Note"]){
-        [self retrieveNotesData];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,8 +99,9 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     
     CoreEvent * currentEvent = [tableData objectAtIndex:indexPath.row];
     
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@", currentEvent.eventName];
-
+    cell.tintColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1] ;
 
     return cell;
 }
@@ -128,7 +138,6 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     NSArray *indexPathArray = [self.tableViewObject indexPathsForSelectedRows];
     if(indexPathArray == Nil){
         
-
       //  NSLog(@"%@", messageField.text);
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:[NSString stringWithFormat:@"Select Data to Post"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -139,12 +148,25 @@ static NSString* const kBaseURL = @"http://localhost:8080";
         for(NSIndexPath *index in indexPathArray)
         {
             CoreEvent * currentEvent = [tableData objectAtIndex:index.row];
-            checkPosted = [self postData:currentEvent];
+            [self.selectedEvents addObject:currentEvent];
+        //    checkPosted = [self postData:currentEvent];
         }
-        if(checkPosted){
-            UIAlertView *alertView = [[UIAlertView alloc]
+     //   if(checkPosted){
+            
+            EventDetailsTableViewController *vc = [[EventDetailsTableViewController alloc] init];
+            vc.selectedEvents = self.selectedEvents;
+            [[self navigationController] pushViewController:vc animated:YES];
+
+      /*      
+       ShareViewController *vc = [[ShareViewController alloc] init];
+       vc.searchCategory = self.categories;
+       vc.searchStartDate = self.searchStartDate;
+       vc.searchEndDate = self.searchEndDate;
+       [[self navigationController] pushViewController:vc animated:YES];
+       
+        UIAlertView *alertView = [[UIAlertView alloc]
                                       initWithTitle:@"Alert"
-                                      message:@"Posts has been shared successfully!! \n Want to send message? (Optional)"
+                                      message:@"Shared successfully!! \n Want to send message? (Optional)"
                                       delegate:self
                                       cancelButtonTitle:@"Cancel"
                                       otherButtonTitles:@"Send Message", nil];
@@ -156,15 +178,15 @@ static NSString* const kBaseURL = @"http://localhost:8080";
             [messageField setPlaceholder:@"[Optional] Type message here.."];
             //  messageField.frame = CGRectMake(100, 100, 100, 100);
             [messageField setBackgroundColor:[UIColor whiteColor]];
-            [alertView show];
+            [alertView show]; */
             
         /*    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SUCCESS!" message:[NSString stringWithFormat:@"Posts has been shared successfully!!"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alertView show]; */
-        }
+   //     }
     }
 }
 
-
+/*
 - (bool *) postData:(CoreEvent *)currEvent {
     
     bool *posted = false;
@@ -178,18 +200,79 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     NSLog(@"Event name to Share: %@",currEvent.eventName);
     //build an info object and convert to json
     
-    NSDictionary *dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 currEvent.eventCategory, @"eventCategory",
-                                 currEvent.eventName, @"eventName",
-                                 currEvent.eventTimestamp, @"eventTimestamp",
-                                 currEvent.eventNotes, @"eventNotes",
-                                 currEvent.eventMedicineAmount, @"eventMedicineAmount",
-                                 currEvent.eventMedicineType, @"eventMedicineType",
-                                 currEvent.eventReadingValue, @"eventReadingValue",
-                                 currEvent.eventMealAmount, @"eventMealAmount",
-                                 currEvent.eventActivityTime, @"eventActivityTime",
-                                 nil];
-  
+    NSString *key = loggedInUserToken;
+    NSString *encCategory, *encName, *encMedicineType, *encReadingValue;
+    
+    if(currEvent.eventCategory){
+        encCategory = [FBEncryptorAES encryptBase64String:currEvent.eventCategory
+                                                               keyString:key
+                                                           separateLines:NO];
+        if([currEvent.eventCategory isEqual:@"Medication"]){
+            encMedicineType = [FBEncryptorAES encryptBase64String:currEvent.eventMedicineType
+                                                        keyString:key
+                                                    separateLines:NO];
+        }
+        if([currEvent.eventCategory isEqual:@"Reading"]){
+            NSString *value = [currEvent.eventReadingValue stringValue];
+            encReadingValue = [FBEncryptorAES encryptBase64String:value
+                                                        keyString:key
+                                                    separateLines:NO];
+            NSLog(@"%@", encReadingValue);
+        }
+    }
+    if(currEvent.eventName){
+
+        encName = [FBEncryptorAES encryptBase64String:currEvent.eventName
+                                            keyString:key
+                                        separateLines:NO];
+    }
+    
+    NSDictionary *dataToShare;
+    if([currEvent.eventCategory isEqual:@"Medication"]){
+        dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
+                        loggedInUserToken, @"UserToken",
+                        encCategory, @"eventCategory",
+                        encName, @"eventName",
+                        currEvent.eventTimestamp, @"eventTimestamp",
+                        currEvent.eventNotes, @"eventNotes",
+                        currEvent.eventMedicineAmount, @"eventMedicineAmount",
+                        encMedicineType, @"eventMedicineType",
+                        currEvent.eventReadingValue, @"eventReadingValue",
+                        currEvent.eventMealAmount, @"eventMealAmount",
+                        currEvent.eventActivityTime, @"eventActivityTime",
+                        nil];
+
+    }
+    else if ([currEvent.eventCategory isEqual:@"Reading"]){
+        dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
+                       loggedInUserToken, @"UserToken",
+                       encCategory, @"eventCategory",
+                       encName, @"eventName",
+                       currEvent.eventTimestamp, @"eventTimestamp",
+                       currEvent.eventNotes, @"eventNotes",
+                       currEvent.eventMedicineAmount, @"eventMedicineAmount",
+                       currEvent.eventMedicineType, @"eventMedicineType",
+                       encReadingValue, @"eventReadingValue",
+                       currEvent.eventMealAmount, @"eventMealAmount",
+                       currEvent.eventActivityTime, @"eventActivityTime",
+                       nil];
+    }
+    else{
+        dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
+                        loggedInUserToken, @"UserToken",
+                        encCategory, @"eventCategory",
+                        encName, @"eventName",
+                        currEvent.eventTimestamp, @"eventTimestamp",
+                        currEvent.eventNotes, @"eventNotes",
+                        currEvent.eventMedicineAmount, @"eventMedicineAmount",
+                        currEvent.eventMedicineType, @"eventMedicineType",
+                        currEvent.eventReadingValue, @"eventReadingValue",
+                        currEvent.eventMealAmount, @"eventMealAmount",
+                        currEvent.eventActivityTime, @"eventActivityTime",
+                        nil];
+    }
+    
+
     //convert object to data
     NSLog(@"%@", dataToShare);
 
@@ -238,6 +321,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     }
     return posted;
 }
+*/
 
 - (void) retrieveMedicineData{
     

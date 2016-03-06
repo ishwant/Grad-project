@@ -10,6 +10,9 @@
 		09EEE651810D4526B17A8AEB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBEE407F98E74807B5E3E8FD /* libPods.a */; };
 		111BCF491C4C793E0066BA67 /* SelectPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BCF471C4C793E0066BA67 /* SelectPostViewController.m */; };
 		111BCF4E1C4DBC730066BA67 /* SelectPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */; };
+		1126713C1C88D44700FE2EC7 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = 112671391C88D44700FE2EC7 /* FBEncryptorAES.m */; };
+		1126713D1C88D44700FE2EC7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126713B1C88D44700FE2EC7 /* NSData+Base64.m */; };
+		112671461C8BE21300FE2EC7 /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */; };
 		114001F81C56AB1600E854B0 /* CoreEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001F61C56AB1600E854B0 /* CoreEvent.m */; };
 		114001FB1C5A1CCD00E854B0 /* MainShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001FA1C5A1CCD00E854B0 /* MainShareController.m */; };
 		114001FF1C5A215B00E854B0 /* ShareMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001FD1C5A215B00E854B0 /* ShareMessageViewController.m */; };
@@ -292,6 +295,12 @@
 		111BCF461C4C793E0066BA67 /* SelectPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectPostViewController.h; path = Sharing/SelectPostViewController.h; sourceTree = "<group>"; };
 		111BCF471C4C793E0066BA67 /* SelectPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectPostViewController.m; path = Sharing/SelectPostViewController.m; sourceTree = "<group>"; };
 		111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelectPostViewController.xib; path = Sharing/SelectPostViewController.xib; sourceTree = "<group>"; };
+		112671381C88D44700FE2EC7 /* FBEncryptorAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEncryptorAES.h; sourceTree = "<group>"; };
+		112671391C88D44700FE2EC7 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
+		1126713A1C88D44700FE2EC7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		1126713B1C88D44700FE2EC7 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		112671441C8BE21300FE2EC7 /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = Sharing/EventDetailsTableViewController.h; sourceTree = "<group>"; };
+		112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = Sharing/EventDetailsTableViewController.m; sourceTree = "<group>"; };
 		114001F61C56AB1600E854B0 /* CoreEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreEvent.m; path = Sharing/CoreEvent.m; sourceTree = "<group>"; };
 		114001F71C56AB1600E854B0 /* CoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreEvent.h; path = Sharing/CoreEvent.h; sourceTree = "<group>"; };
 		114001F91C5A1CCD00E854B0 /* MainShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainShareController.h; path = Sharing/MainShareController.h; sourceTree = "<group>"; };
@@ -759,6 +768,8 @@
 				114001FA1C5A1CCD00E854B0 /* MainShareController.m */,
 				114001FC1C5A215B00E854B0 /* ShareMessageViewController.h */,
 				114001FD1C5A215B00E854B0 /* ShareMessageViewController.m */,
+				112671441C8BE21300FE2EC7 /* EventDetailsTableViewController.h */,
+				112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -913,6 +924,10 @@
 		533F30281773266500AD89E2 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				112671381C88D44700FE2EC7 /* FBEncryptorAES.h */,
+				112671391C88D44700FE2EC7 /* FBEncryptorAES.m */,
+				1126713A1C88D44700FE2EC7 /* NSData+Base64.h */,
+				1126713B1C88D44700FE2EC7 /* NSData+Base64.m */,
 				539E1CCD17B7FEA10059ED17 /* UIImage+ImageEffects.h */,
 				539E1CCE17B7FEA10059ED17 /* UIImage+ImageEffects.m */,
 				533F30291773266500AD89E2 /* NSDate+Extension.h */,
@@ -2008,6 +2023,7 @@
 				117FC80A1C49958A006E92BE /* ShareViewController.m in Sources */,
 				533F32F61773266600AD89E2 /* UAEvent.m in Sources */,
 				5330A28818AAC9B800000A47 /* UAEventInputTextViewViewCell.m in Sources */,
+				112671461C8BE21300FE2EC7 /* EventDetailsTableViewController.m in Sources */,
 				533F32F71773266600AD89E2 /* UAManagedObject.m in Sources */,
 				533F32F81773266600AD89E2 /* UAMeal.m in Sources */,
 				533F32F91773266600AD89E2 /* UAMedicine.m in Sources */,
@@ -2080,9 +2096,11 @@
 				533F34D41773266600AD89E2 /* UALeastSquareFitCalculator.m in Sources */,
 				5330A26D18AAC7E200000A47 /* UAMedicineInputViewController.m in Sources */,
 				5330A28C18AAC9B800000A47 /* UANavPageControl.m in Sources */,
+				1126713C1C88D44700FE2EC7 /* FBEncryptorAES.m in Sources */,
 				533F34D61773266600AD89E2 /* UAReportPreviewView.m in Sources */,
 				533F34D71773266600AD89E2 /* UAReportsViewController.m in Sources */,
 				533F34D81773266600AD89E2 /* UADateButton.m in Sources */,
+				1126713D1C88D44700FE2EC7 /* NSData+Base64.m in Sources */,
 				5332821E1903B85B009DEE37 /* UAGlucoseCandlestickChartViewController.m in Sources */,
 				533F34D91773266600AD89E2 /* UADatePickerController.m in Sources */,
 				53F29548187845360021F6FC /* UAAnalytikController.m in Sources */,

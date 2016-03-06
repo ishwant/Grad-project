@@ -9,15 +9,19 @@
 @property (weak, nonatomic) UIBarButtonItem *postButton;
 
 @property (nonatomic,retain) NSMutableArray *tableData;
+@property (nonatomic,retain) NSMutableArray *selectedEvents;
 
-@property (strong, nonatomic) NSString *searchCategory;
+
+@property (strong, nonatomic) NSArray *searchCategory;
 @property (strong, nonatomic) NSDate *searchStartDate;
 @property (strong, nonatomic) NSDate *searchEndDate;
+
+@property (strong, nonatomic) NSString *loggedInUserToken;
 
 @property (strong, nonatomic) IBOutlet UITextField *messageField;
 
 #pragma mark - Methods
-- (void) retrieveData;
+
 - (void) retrieveMedicineData;
 - (void) retrieveActivityData;
 - (void) retrieveMealData;
