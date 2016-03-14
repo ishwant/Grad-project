@@ -300,7 +300,7 @@
             {
              //   SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
 
-                 Reachability *netReach = [Reachability reachabilityWithHostName:@"localhost:8080"];
+                 Reachability *netReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
 
                 NetworkStatus netStatus = [netReach currentReachabilityStatus];
                 NSLog(@"netStatus %ld", (long)netStatus);

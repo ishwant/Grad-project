@@ -111,7 +111,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     
     //ENCRYPT TOKEN
     NSString *encryptedToken= [FBEncryptorAES encryptBase64String:enteredUserToken
-                                                    keyString:enteredUserFName
+                                                    keyString: [enteredUserFName lowercaseString]
                                                 separateLines:NO];
     NSLog(@"encrypted: %@", encryptedToken);
 
