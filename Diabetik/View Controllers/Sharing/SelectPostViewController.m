@@ -351,7 +351,7 @@ UIGestureRecognizer *tap;
         
         NSDate *startDate = [dateFormat dateFromString:startDateField.text];
         NSDate *endDate = [dateFormat dateFromString:endDateField.text];
-   //     NSDate *today = [NSDate date];
+        NSDate *today = [NSDate date];
         
         NSLog(@"after conversion StartDate: %@", startDate);
         NSLog(@"after conversion EndDate: %@", endDate);
@@ -361,7 +361,16 @@ UIGestureRecognizer *tap;
             
             [self.alertView show];
         }
-
+   /*     else if(endDate>today){
+            self.alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Date" message:@"Cannot select future date" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            
+            [self.alertView show];
+        }
+        else if(startDate>today){
+            self.alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Date" message:@"Cannot select future date" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            
+            [self.alertView show];
+        } */
         else{
             //set time to 00 hrs
             unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;

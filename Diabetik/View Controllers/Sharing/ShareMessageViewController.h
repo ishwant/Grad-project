@@ -11,8 +11,8 @@
 @interface ShareMessageViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *sendMessageButton;
-@property (strong, nonatomic) IBOutlet UITextField *textMessageField;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *sendMessageButton;
+@property (strong, nonatomic) IBOutlet UITextView *textMessageField;
 
 -(IBAction)sendMessageButtonTapped:(id)sender;
 @end

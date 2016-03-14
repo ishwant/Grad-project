@@ -36,6 +36,8 @@
 #import "MainShareController.h"
 #import "UASideMenuCell.h"
 
+#import "Reachability.h"
+
 @interface UASideMenuViewController ()
 {
     id reminderUpdateNotifier;
@@ -294,9 +296,19 @@
         }
         else if(indexPath.row == 2)
         {
-            if(![[navigationController topViewController] isKindOfClass:[SelectPostViewController class]])
+            if(![[navigationController topViewController] isKindOfClass:[MainShareController class]])
             {
              //   SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
+
+                 Reachability *netReach = [Reachability reachabilityWithHostName:@"localhost:8080"];
+
+                NetworkStatus netStatus = [netReach currentReachabilityStatus];
+                NSLog(@"netStatus %ld", (long)netStatus);
+                if (netStatus==NotReachable) {
+                    NSLog(@"Not reachable, aww :-(");
+                } else {
+                    NSLog(@"Reachable");
+                }
                 MainShareController *vc = [[MainShareController alloc] init];
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }

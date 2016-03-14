@@ -12,10 +12,13 @@
 		111BCF4E1C4DBC730066BA67 /* SelectPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */; };
 		1126713C1C88D44700FE2EC7 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = 112671391C88D44700FE2EC7 /* FBEncryptorAES.m */; };
 		1126713D1C88D44700FE2EC7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126713B1C88D44700FE2EC7 /* NSData+Base64.m */; };
-		112671461C8BE21300FE2EC7 /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */; };
+		113545431C90FCF400272119 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113545411C90FCF400272119 /* customCell.m */; };
 		114001F81C56AB1600E854B0 /* CoreEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001F61C56AB1600E854B0 /* CoreEvent.m */; };
 		114001FB1C5A1CCD00E854B0 /* MainShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001FA1C5A1CCD00E854B0 /* MainShareController.m */; };
 		114001FF1C5A215B00E854B0 /* ShareMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114001FD1C5A215B00E854B0 /* ShareMessageViewController.m */; };
+		116EBAA11C91510800956106 /* Checkbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 116EBAA01C91510800956106 /* Checkbox.m */; };
+		116EBAA41C9218BB00956106 /* detailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116EBAA31C9218BB00956106 /* detailTableViewController.m */; };
+		116EBAA71C9632A100956106 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 116EBAA61C9632A100956106 /* MessageCell.m */; };
 		117FC8091C49958A006E92BE /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117FC8061C49958A006E92BE /* ShareViewController.xib */; };
 		117FC80A1C49958A006E92BE /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FC8071C49958A006E92BE /* ShareViewController.m */; };
 		118906E21C14239000F61D1B /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118906E01C14239000F61D1B /* LoginController.m */; };
@@ -299,14 +302,21 @@
 		112671391C88D44700FE2EC7 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		1126713A1C88D44700FE2EC7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		1126713B1C88D44700FE2EC7 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		112671441C8BE21300FE2EC7 /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = Sharing/EventDetailsTableViewController.h; sourceTree = "<group>"; };
-		112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = Sharing/EventDetailsTableViewController.m; sourceTree = "<group>"; };
+		113545401C90FCF400272119 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = Sharing/customCell.h; sourceTree = "<group>"; };
+		113545411C90FCF400272119 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = Sharing/customCell.m; sourceTree = "<group>"; };
 		114001F61C56AB1600E854B0 /* CoreEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreEvent.m; path = Sharing/CoreEvent.m; sourceTree = "<group>"; };
 		114001F71C56AB1600E854B0 /* CoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreEvent.h; path = Sharing/CoreEvent.h; sourceTree = "<group>"; };
 		114001F91C5A1CCD00E854B0 /* MainShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainShareController.h; path = Sharing/MainShareController.h; sourceTree = "<group>"; };
 		114001FA1C5A1CCD00E854B0 /* MainShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainShareController.m; path = Sharing/MainShareController.m; sourceTree = "<group>"; };
 		114001FC1C5A215B00E854B0 /* ShareMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareMessageViewController.h; path = Sharing/ShareMessageViewController.h; sourceTree = "<group>"; };
 		114001FD1C5A215B00E854B0 /* ShareMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareMessageViewController.m; path = Sharing/ShareMessageViewController.m; sourceTree = "<group>"; };
+		116EBA9F1C91510800956106 /* Checkbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Checkbox.h; path = Sharing/Checkbox.h; sourceTree = "<group>"; };
+		116EBAA01C91510800956106 /* Checkbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Checkbox.m; path = Sharing/Checkbox.m; sourceTree = "<group>"; };
+		116EBAA21C9218BB00956106 /* detailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detailTableViewController.h; path = Sharing/detailTableViewController.h; sourceTree = "<group>"; };
+		116EBAA31C9218BB00956106 /* detailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailTableViewController.m; path = Sharing/detailTableViewController.m; sourceTree = "<group>"; };
+		116EBAA51C9632A100956106 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = Sharing/MessageCell.h; sourceTree = "<group>"; };
+		116EBAA61C9632A100956106 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = Sharing/MessageCell.m; sourceTree = "<group>"; };
+		116EBAAE1C9672DF00956106 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		117FC8061C49958A006E92BE /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Sharing/ShareViewController.xib; sourceTree = "<group>"; };
 		117FC8071C49958A006E92BE /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = Sharing/ShareViewController.m; sourceTree = "<group>"; };
 		117FC8081C49958A006E92BE /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Sharing/ShareViewController.h; sourceTree = "<group>"; };
@@ -756,11 +766,15 @@
 		117FC7491C436A43006E92BE /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				116EBA9F1C91510800956106 /* Checkbox.h */,
+				116EBAA01C91510800956106 /* Checkbox.m */,
 				114001F61C56AB1600E854B0 /* CoreEvent.m */,
 				114001F71C56AB1600E854B0 /* CoreEvent.h */,
 				117FC8061C49958A006E92BE /* ShareViewController.xib */,
 				117FC8081C49958A006E92BE /* ShareViewController.h */,
 				117FC8071C49958A006E92BE /* ShareViewController.m */,
+				116EBAA21C9218BB00956106 /* detailTableViewController.h */,
+				116EBAA31C9218BB00956106 /* detailTableViewController.m */,
 				111BCF461C4C793E0066BA67 /* SelectPostViewController.h */,
 				111BCF471C4C793E0066BA67 /* SelectPostViewController.m */,
 				111BCF4D1C4DBC730066BA67 /* SelectPostViewController.xib */,
@@ -768,8 +782,10 @@
 				114001FA1C5A1CCD00E854B0 /* MainShareController.m */,
 				114001FC1C5A215B00E854B0 /* ShareMessageViewController.h */,
 				114001FD1C5A215B00E854B0 /* ShareMessageViewController.m */,
-				112671441C8BE21300FE2EC7 /* EventDetailsTableViewController.h */,
-				112671451C8BE21300FE2EC7 /* EventDetailsTableViewController.m */,
+				116EBAA51C9632A100956106 /* MessageCell.h */,
+				116EBAA61C9632A100956106 /* MessageCell.m */,
+				113545401C90FCF400272119 /* customCell.h */,
+				113545411C90FCF400272119 /* customCell.m */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -1042,6 +1058,7 @@
 		533F324F1773266600AD89E2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				116EBAAE1C9672DF00956106 /* Reachability.h */,
 				117FC7491C436A43006E92BE /* Sharing */,
 				118906DE1C14237B00F61D1B /* Login */,
 				53EABCD118B3D8A3001C5C39 /* Summary */,
@@ -2023,7 +2040,6 @@
 				117FC80A1C49958A006E92BE /* ShareViewController.m in Sources */,
 				533F32F61773266600AD89E2 /* UAEvent.m in Sources */,
 				5330A28818AAC9B800000A47 /* UAEventInputTextViewViewCell.m in Sources */,
-				112671461C8BE21300FE2EC7 /* EventDetailsTableViewController.m in Sources */,
 				533F32F71773266600AD89E2 /* UAManagedObject.m in Sources */,
 				533F32F81773266600AD89E2 /* UAMeal.m in Sources */,
 				533F32F91773266600AD89E2 /* UAMedicine.m in Sources */,
@@ -2038,6 +2054,7 @@
 				533F32FF1773266600AD89E2 /* UATag.m in Sources */,
 				53DED73F1909B5EB00A0B102 /* UASummaryWidgetListTableViewCell.m in Sources */,
 				5330A26818AAC7E200000A47 /* UAActivityInputViewController.m in Sources */,
+				116EBAA41C9218BB00956106 /* detailTableViewController.m in Sources */,
 				533F33021773266600AD89E2 /* Diabetik.xcdatamodeld in Sources */,
 				533F33031773266600AD89E2 /* main.m in Sources */,
 				538A2833190026600083D124 /* UATimeSinceWidget.m in Sources */,
@@ -2055,6 +2072,7 @@
 				53F2955D18786B560021F6FC /* UASettingsAnalytikViewController.m in Sources */,
 				538A2830190026550083D124 /* UATimeOfDayWidget.m in Sources */,
 				5330A28718AAC9B800000A47 /* UAEventInputTextFieldViewCell.m in Sources */,
+				116EBAA71C9632A100956106 /* MessageCell.m in Sources */,
 				53F78ED918422B5B006736F5 /* TGRImageZoomAnimationController.m in Sources */,
 				53FE5FAE189EC077008AC334 /* UACategoryInputView.m in Sources */,
 				53AFAA2418A90E7B00E65168 /* UAAddEntryModalView.m in Sources */,
@@ -2076,6 +2094,7 @@
 				533F34C41773266600AD89E2 /* UASideMenuCell.m in Sources */,
 				533F34C51773266600AD89E2 /* UASideMenuViewController.m in Sources */,
 				533F34C61773266600AD89E2 /* UALocationMapPin.m in Sources */,
+				113545431C90FCF400272119 /* customCell.m in Sources */,
 				5330A26E18AAC7E200000A47 /* UANoteInputViewController.m in Sources */,
 				533F34C81773266600AD89E2 /* UALocationReminderMapViewController.m in Sources */,
 				53F2955E18786B560021F6FC /* UASettingsDropboxViewController.m in Sources */,
@@ -2116,6 +2135,7 @@
 				539E1CCF17B7FEA10059ED17 /* UIImage+ImageEffects.m in Sources */,
 				533F34DF1773266600AD89E2 /* UASettingsViewController.m in Sources */,
 				533F34E01773266600AD89E2 /* UATimelineHeaderViewCell.m in Sources */,
+				116EBAA11C91510800956106 /* Checkbox.m in Sources */,
 				53438ADF1901798A00E2B2E1 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				533F34E11773266600AD89E2 /* UATimelineViewCell.m in Sources */,
 				53A5D6C11870D5950077DFBE /* UAInsulinCalculatorTitleView.m in Sources */,

@@ -7,12 +7,17 @@
 #import "UAReading.h"
 #import "UANote.h"
 #import "EventDetailsTableViewController.h"
+#import "detailTableViewController.h"
 
 #import "FBEncryptorAES.h"
 
+#import "customCell.h"
+
 static NSString* const kBaseURL = @"http://localhost:8080";
 
-@interface ShareViewController ()
+@interface ShareViewController () <getDetailsDelegate> {
+    NSIndexPath *selectedIndexPath;
+}
 
 @end
 
@@ -31,6 +36,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [tableViewObject setSeparatorStyle: UITableViewCellSeparatorStyleNone];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithTitle:@""
                                              style:UIBarButtonItemStylePlain
@@ -41,6 +47,8 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     self.title = @"SHARE";
     
     tableData = [[NSMutableArray alloc] init];
+    self.checkedData = [[NSMutableArray alloc] init];
+
     self.selectedEvents = [[NSMutableArray alloc] init];
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"SEND"
@@ -81,26 +89,85 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)sendData:(NSString *)selectedDetails
+{
+    self.selectedEvent.eventDetails = selectedDetails;
+    NSLog(@"Received Data: %@", self.selectedEvent.eventDetails);
+    CoreEvent *update = [self.tableData objectAtIndex:selectedIndexPath.row];
+    
+    NSUInteger index;
+    for(CoreEvent *item in self.checkedData) {
+        if([item isEqual:update]) {
+            
+            index = [self.checkedData indexOfObject:item];
+            item.eventDetails = selectedDetails;
+            [self.checkedData replaceObjectAtIndex:index withObject:item];
+            break;
+        }
+    }
+    update.eventDetails = selectedDetails;
+    [self.tableData replaceObjectAtIndex:selectedIndexPath.row withObject:update];
+    
+}
+
+
 #pragma - markup TableView Delegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [tableData count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40.0f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    customCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    if(cell == nil){
+        cell =[[customCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
     CoreEvent * currentEvent = [tableData objectAtIndex:indexPath.row];
     
+    cell.cellLabel.text = [NSString stringWithFormat:@"%@", currentEvent.eventName];
+    cell.cellSubtitleLabel.text = [NSString stringWithFormat:@"%@", currentEvent.eventTimestamp];
+    NSLog(@"eventName: %@", currentEvent.eventName);
+    NSLog(@"LabeL: %@", cell.cellLabel.text);
+    NSLog(@"Subtitle: %@", cell.cellSubtitleLabel.text);
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", currentEvent.eventName];
+    cell.checkBoxButton.checked = true;
+
+    [self.checkedData insertObject:currentEvent atIndex:indexPath.row];
+    
+    [self updateAccessibilityForCell:cell];
+    
+    NSLog(@"%@", self.checkedData);
+ //   cell.checkBoxButton.selected = true;
+////     cell.checkBoxButton.tag = indexPath.row;
+//    [cell.checkBoxButton addTarget:self action:@selector(checkBoxButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.checkBoxButton addTarget:self action:@selector(checkBoxButtonTapped:forEvent:) forControlEvents:UIControlEventValueChanged];
+
+    if([currentEvent.eventCategory  isEqual: @"Medication"]){
+        cell.imageView.image = [UIImage imageNamed:@"AddEntryModalMedicineIcon.png"];
+    }
+    else if ([currentEvent.eventCategory isEqual:@"Reading"]){
+        cell.imageView.image = [UIImage imageNamed:@"AddEntryModalBloodIcon"];
+    }
+    else if ([currentEvent.eventCategory isEqual:@"Activity"]){
+        cell.imageView.image = [UIImage imageNamed:@"AddEntryModalActivityIcon"];
+    }
+    else if ([currentEvent.eventCategory isEqual:@"Food"]){
+        cell.imageView.image = [UIImage imageNamed:@"AddEntryModalMealIcon"];
+    }
+    else if ([currentEvent.eventCategory isEqual:@"Note"]){
+        cell.imageView.image = [UIImage imageNamed:@"AddEntryModalNoteIcon"];
+    }
+
+    
     cell.tintColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1] ;
 
     return cell;
@@ -108,68 +175,78 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.selectedEvent = [self.tableData objectAtIndex:indexPath.row];
     
-    if(cell.accessoryType == UITableViewCellAccessoryCheckmark){
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-    }
-    else{
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
+    selectedIndexPath = indexPath;
+    NSLog(@"Selected Row: %@", selectedIndexPath);
+    detailTableViewController *vc = [[detailTableViewController alloc] init];
+    [vc setDelegate:self];
+  //  vc.selectedEvents = self.selectedEvents;
+    [[self navigationController] pushViewController:vc animated:YES];
+    NSLog(@"Selected Event: %@", self.selectedEvent);
+    vc = nil;
+    
 }
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+
+
+-(IBAction)checkBoxButtonTapped:(id)sender forEvent:(UIEvent*)event{
+    NSLog(@"checkBoxButtonTapped");
+    
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView: self.tableViewObject];
+    
+    NSIndexPath *indexPath = [self.tableViewObject indexPathForRowAtPoint:currentTouchPosition];
+    customCell *targetCustomCell = (customCell *)[tableViewObject cellForRowAtIndexPath:indexPath];
+  //  NSLog(@"value of isChecked %@",targetCustomCell.checkBoxButton.checked);
+    if (indexPath != nil)
+    {
+        // Update our data source array with the new checked state.
+        
+        CoreEvent * currentEvent = [self.tableData objectAtIndex:indexPath.row];
+
+        if(!targetCustomCell.checkBoxButton.isChecked){
+            for(id item in self.checkedData) {
+                if([item isEqual:currentEvent]) {
+                    [self.checkedData removeObject:item];
+                    NSLog(@"cell Removed: %@", targetCustomCell.cellLabel.text);
+                    break;
+                }
+            }
+            NSLog(@"checkbox unchecked:");
+        }
+        else{
+            [self.checkedData addObject:currentEvent];
+        }
+
+    }
+    
+    // Accessibility
+    [self updateAccessibilityForCell:(customCell*)[self.tableViewObject cellForRowAtIndexPath:indexPath]];
+}
+
+
+- (void)updateAccessibilityForCell:(customCell*)cell
 {
-    if (alertView.tag == 12) {
-        if (buttonIndex == 1) {
-
-            messageField = [alertView textFieldAtIndex:0];
-          //  messageField.placeholder = @"[Optional] Type message...";
-            
-            NSLog(@"message: %@", messageField.text);
-        }
-    }
+    // The cell's accessibilityValue is the Checkbox's accessibilityValue.
+    cell.accessibilityValue = cell.checkBoxButton.accessibilityValue;
+    
+    cell.checkBoxButton.accessibilityLabel = cell.cellLabel.text;
 }
 
--(IBAction)postButtonTapped:(id)sender{
-    bool * checkPosted = false;
-    NSArray *indexPathArray = [self.tableViewObject indexPathsForSelectedRows];
-    if(indexPathArray == Nil){
-        
-      //  NSLog(@"%@", messageField.text);
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:[NSString stringWithFormat:@"Select Data to Post"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView show];
-        
-    }
-    else{
-        for(NSIndexPath *index in indexPathArray)
-        {
-            CoreEvent * currentEvent = [tableData objectAtIndex:index.row];
-            [self.selectedEvents addObject:currentEvent];
-        //    checkPosted = [self postData:currentEvent];
-        }
-     //   if(checkPosted){
-            
-            EventDetailsTableViewController *vc = [[EventDetailsTableViewController alloc] init];
-            vc.selectedEvents = self.selectedEvents;
-            [[self navigationController] pushViewController:vc animated:YES];
 
-      /*      
-       ShareViewController *vc = [[ShareViewController alloc] init];
-       vc.searchCategory = self.categories;
-       vc.searchStartDate = self.searchStartDate;
-       vc.searchEndDate = self.searchEndDate;
-       [[self navigationController] pushViewController:vc animated:YES];
-       
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Alert"
-                                      message:@"Shared successfully!! \n Want to send message? (Optional)"
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 4) {
+        if (buttonIndex == 1) {
+            NSLog(@"YES button clicked");
+            
+            UIAlertView *alertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Send Message"
+                                      message:@""
                                       delegate:self
-                                      cancelButtonTitle:@"Cancel"
-                                      otherButtonTitles:@"Send Message", nil];
+                                      cancelButtonTitle:@"Send"
+                                      otherButtonTitles:nil];
             
             [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
             alertView.tag = 12;
@@ -178,15 +255,116 @@ static NSString* const kBaseURL = @"http://localhost:8080";
             [messageField setPlaceholder:@"[Optional] Type message here.."];
             //  messageField.frame = CGRectMake(100, 100, 100, 100);
             [messageField setBackgroundColor:[UIColor whiteColor]];
-            [alertView show]; */
+            [alertView show];
+
+        //    messageField = [alertView textFieldAtIndex:0];
+            //  messageField.placeholder = @"[Optional] Type message...";
             
-        /*    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SUCCESS!" message:[NSString stringWithFormat:@"Posts has been shared successfully!!"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alertView show]; */
-   //     }
+        //    NSLog(@"message: %@", messageField.text);
+            
+        }
+        else if(buttonIndex == 2){
+            
+            NSLog(@"NO button clicked");
+            
+            bool * checkPosted = false;
+            for(CoreEvent *currEvent in self.checkedData){
+                NSLog(@"Entering the iteration");
+                checkPosted = [self postData:currEvent];
+            }
+            if(checkPosted){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:[NSString stringWithFormat:@"Shared successfully"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                [[self navigationController] popToRootViewControllerAnimated:YES];
+            }
+        }
+        else if (buttonIndex == 0){
+            NSLog(@"Cancel button clicked");
+        }
+    }
+    if (alertView.tag == 12) {
+        
+        if (buttonIndex == 0) {
+            
+            bool * checkPosted = false;
+            for(CoreEvent *currEvent in self.checkedData){
+                NSLog(@"Entering the iteration");
+                checkPosted = [self postData:currEvent];
+            }
+            if(checkPosted){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:[NSString stringWithFormat:@"Shared successfully"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                [[self navigationController] popToRootViewControllerAnimated:YES];
+            }
+        }
     }
 }
 
-/*
+-(IBAction)postButtonTapped:(id)sender{
+    NSLog(@"%@",self.checkedData);
+    NSLog(@"%@", self.selectedEvents);
+    for(CoreEvent *item in self.checkedData) {
+        NSLog(@"checked data: %@", item.eventDetails);
+    }
+    
+    if([self.checkedData count]==0){
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Alert"
+                                  message:@"Select some entries to share!"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        alertView.tag = 1;
+        [alertView show];
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Alert"
+                                  message:@"Want to send some message?"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:@"YES", @"NO",nil];
+        alertView.tag = 4;
+        [alertView show];
+    }
+    
+/*    UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:@"Message"
+                              message:@"(Optional) Any message"
+                              delegate:self
+                              cancelButtonTitle:@"Cancel"
+                              otherButtonTitles:@"Send Message", nil];
+    
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alertView.tag = 12;
+    [alertView textFieldAtIndex:0].frame = CGRectMake(25,25,200,200);
+    messageField = [alertView textFieldAtIndex:0];
+    [messageField setPlaceholder:@"[Optional] Type message here.."];
+    //  messageField.frame = CGRectMake(100, 100, 100, 100);
+    [messageField setBackgroundColor:[UIColor whiteColor]];
+    [alertView show];
+    
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SUCCESS!" message:[NSString stringWithFormat:@"Posts has been shared successfully!!"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+     [alertView show];
+    
+    
+    
+    
+    
+    
+    bool * checkPosted = false;
+    for(CoreEvent *currEvent in self.selectedEvents){
+        NSLog(@"Entering the iteration");
+        checkPosted = [self postData:currEvent];
+    }
+    if(checkPosted){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:[NSString stringWithFormat:@"Shared successfully"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView show];
+        [[self navigationController] popToRootViewControllerAnimated:YES];
+    } */
+}
+
+
 - (bool *) postData:(CoreEvent *)currEvent {
     
     bool *posted = false;
@@ -200,13 +378,13 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     NSLog(@"Event name to Share: %@",currEvent.eventName);
     //build an info object and convert to json
     
-    NSString *key = loggedInUserToken;
+    NSString *key = self.loggedInUserToken;
     NSString *encCategory, *encName, *encMedicineType, *encReadingValue;
     
     if(currEvent.eventCategory){
         encCategory = [FBEncryptorAES encryptBase64String:currEvent.eventCategory
-                                                               keyString:key
-                                                           separateLines:NO];
+                                                keyString:key
+                                            separateLines:NO];
         if([currEvent.eventCategory isEqual:@"Medication"]){
             encMedicineType = [FBEncryptorAES encryptBase64String:currEvent.eventMedicineType
                                                         keyString:key
@@ -221,7 +399,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
         }
     }
     if(currEvent.eventName){
-
+        
         encName = [FBEncryptorAES encryptBase64String:currEvent.eventName
                                             keyString:key
                                         separateLines:NO];
@@ -230,22 +408,24 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     NSDictionary *dataToShare;
     if([currEvent.eventCategory isEqual:@"Medication"]){
         dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
-                        loggedInUserToken, @"UserToken",
-                        encCategory, @"eventCategory",
-                        encName, @"eventName",
-                        currEvent.eventTimestamp, @"eventTimestamp",
-                        currEvent.eventNotes, @"eventNotes",
-                        currEvent.eventMedicineAmount, @"eventMedicineAmount",
-                        encMedicineType, @"eventMedicineType",
-                        currEvent.eventReadingValue, @"eventReadingValue",
-                        currEvent.eventMealAmount, @"eventMealAmount",
-                        currEvent.eventActivityTime, @"eventActivityTime",
-                        nil];
-
+                       self.loggedInUserToken, @"UserToken",
+                       encCategory, @"eventCategory",
+                       encName, @"eventName",
+                       currEvent.eventTimestamp, @"eventTimestamp",
+                       currEvent.eventNotes, @"eventNotes",
+                       currEvent.eventMedicineAmount, @"eventMedicineAmount",
+                       encMedicineType, @"eventMedicineType",
+                       currEvent.eventReadingValue, @"eventReadingValue",
+                       currEvent.eventMealAmount, @"eventMealAmount",
+                       currEvent.eventActivityTime, @"eventActivityTime",
+                       self.messageField.text, @"eventMessage",
+                       currEvent.eventDetails, @"eventDetails",
+                       nil];
+        
     }
     else if ([currEvent.eventCategory isEqual:@"Reading"]){
         dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
-                       loggedInUserToken, @"UserToken",
+                       self.loggedInUserToken, @"UserToken",
                        encCategory, @"eventCategory",
                        encName, @"eventName",
                        currEvent.eventTimestamp, @"eventTimestamp",
@@ -255,27 +435,31 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                        encReadingValue, @"eventReadingValue",
                        currEvent.eventMealAmount, @"eventMealAmount",
                        currEvent.eventActivityTime, @"eventActivityTime",
+                       self.messageField.text, @"eventMessage",
+                       currEvent.eventDetails, @"eventDetails",
                        nil];
     }
     else{
         dataToShare = [NSDictionary dictionaryWithObjectsAndKeys:
-                        loggedInUserToken, @"UserToken",
-                        encCategory, @"eventCategory",
-                        encName, @"eventName",
-                        currEvent.eventTimestamp, @"eventTimestamp",
-                        currEvent.eventNotes, @"eventNotes",
-                        currEvent.eventMedicineAmount, @"eventMedicineAmount",
-                        currEvent.eventMedicineType, @"eventMedicineType",
-                        currEvent.eventReadingValue, @"eventReadingValue",
-                        currEvent.eventMealAmount, @"eventMealAmount",
-                        currEvent.eventActivityTime, @"eventActivityTime",
-                        nil];
+                       self.loggedInUserToken, @"UserToken",
+                       encCategory, @"eventCategory",
+                       encName, @"eventName",
+                       currEvent.eventTimestamp, @"eventTimestamp",
+                       currEvent.eventNotes, @"eventNotes",
+                       currEvent.eventMedicineAmount, @"eventMedicineAmount",
+                       currEvent.eventMedicineType, @"eventMedicineType",
+                       currEvent.eventReadingValue, @"eventReadingValue",
+                       currEvent.eventMealAmount, @"eventMealAmount",
+                       currEvent.eventActivityTime, @"eventActivityTime",
+                       self.messageField.text, @"eventMessage",
+                       currEvent.eventDetails, @"eventDetails",
+                       nil];
     }
     
-
+    
     //convert object to data
     NSLog(@"%@", dataToShare);
-
+    
     if([NSJSONSerialization isValidJSONObject:dataToShare]){
         
         NSLog(@"YES, CAN CONVERT ");
@@ -321,8 +505,8 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     }
     return posted;
 }
-*/
 
+ 
 - (void) retrieveMedicineData{
     
     NSManagedObjectContext *moc = [[UACoreDataController sharedInstance] managedObjectContext];
@@ -399,7 +583,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                             }
                             NSString *eCategory = [[NSString alloc] initWithFormat:@"Medication"];
                             
-                            CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:eAmount andeventMedicineType: medicineType andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null]];
+                            CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:eAmount andeventMedicineType: medicineType andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null] andeventDetails:NULL];
 
                             //Add our event object to our events array
                             [tableData addObject:myevent];
@@ -484,7 +668,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                                 eNotes = (NSString *)[NSNull null];
                             }
                             NSString *eCategory = [[NSString alloc] initWithFormat:@"Activity"];
-                            CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:eMinutes];
+                            CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:eMinutes andeventDetails:NULL];
                             
                             //Add our event object to our events array
                             [tableData addObject:myevent];
@@ -568,7 +752,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                             eNotes = (NSString *)[NSNull null];
                         }
                         NSString *eCategory = [[NSString alloc] initWithFormat:@"Food"];
-                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:eAmount andeventActivityTime:(NSNumber *)[NSNull null]];
+                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:eAmount andeventActivityTime:(NSNumber *)[NSNull null] andeventDetails:NULL];
                         
                         //Add our event object to our events array
                         [tableData addObject:myevent];
@@ -652,7 +836,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                             eNotes = (NSString *)[NSNull null];
                         }
                         NSString *eCategory = [[NSString alloc] initWithFormat:@"Reading"];
-                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:eReading andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null]];
+                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:eReading andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null] andeventDetails:NULL];
                         
                         //Add our event object to our events array
                         [tableData addObject:myevent];
@@ -735,7 +919,7 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                             eNotes = (NSString *)[NSNull null];
                         }
                         NSString *eCategory = [[NSString alloc] initWithFormat:@"Note"];
-                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null]];
+                        CoreEvent * myevent = [[CoreEvent alloc] initWitheventCategory:eCategory andeventName:eName andeventTimestamp:eDate andeventNotes:eNotes andeventMedicineAmount:(NSNumber *)[NSNull null] andeventMedicineType: (NSString *)[NSNull null] andeventReadingValue:(NSNumber *)[NSNull null] andeventMealAmount:(NSNumber *)[NSNull null] andeventActivityTime:(NSNumber *)[NSNull null] andeventDetails:NULL];
                         
                         //Add our event object to our events array
                         [tableData addObject:myevent];

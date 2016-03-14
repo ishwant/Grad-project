@@ -12,7 +12,7 @@
 
 @interface EventDetailsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak,nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *details;
 @property (strong, nonatomic) NSMutableArray *selectedDetails;

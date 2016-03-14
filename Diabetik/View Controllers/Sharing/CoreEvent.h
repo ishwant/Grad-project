@@ -32,9 +32,12 @@
 //Message
 @property (nonatomic, strong) NSString * eventmessage;
 
+//Details
+@property (nonatomic, strong) NSString * eventDetails;
+
 //Methods
 
--(id) initWitheventCategory : (NSString *) eCategory andeventName: (NSString *) eName andeventTimestamp: (NSString *) eTimestamp andeventNotes: (NSString *) eNotes andeventMedicineAmount: (NSNumber *) eMedicineAmount andeventMedicineType: (NSString *) eMedicineType andeventReadingValue: (NSNumber *) eReadingValue andeventMealAmount: (NSNumber *) eMealAmount andeventActivityTime: (NSNumber *) eActivityTime;
+-(id) initWitheventCategory : (NSString *) eCategory andeventName: (NSString *) eName andeventTimestamp: (NSString *) eTimestamp andeventNotes: (NSString *) eNotes andeventMedicineAmount: (NSNumber *) eMedicineAmount andeventMedicineType: (NSString *) eMedicineType andeventReadingValue: (NSNumber *) eReadingValue andeventMealAmount: (NSNumber *) eMealAmount andeventActivityTime: (NSNumber *) eActivityTime andeventDetails: (NSString *)eDetails;
 -(id) initWithMessage: (NSString *) emessage;
 
 @end

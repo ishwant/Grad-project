@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:@""
+                                            initWithTitle:@""
                                              style:UIBarButtonItemStylePlain
                                              target:nil
                                              action:nil];
@@ -47,6 +47,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -55,8 +56,10 @@
     }
     if (indexPath.row == 0){
         
+    //    cell.tintColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1]
         self.postButton = [[UIButton alloc] initWithFrame:CGRectMake(65,20,200,30)];
-        [self.postButton setBackgroundColor:[UIColor grayColor]];
+    //    [self.postButton setBackgroundColor:[UIColor grayColor]];
+        [self.postButton setBackgroundColor:[UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1]];
         [self.postButton addTarget:self action:@selector(postButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.postButton setTitle:@"Send Entries" forState:UIControlStateNormal];
         
@@ -65,7 +68,7 @@
     if (indexPath.row == 1){
         
         self.messageButton = [[UIButton alloc] initWithFrame:CGRectMake(65,20,200,30)];
-        [self.messageButton setBackgroundColor:[UIColor grayColor]];
+        [self.messageButton setBackgroundColor:[UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1]];
         [self.messageButton addTarget:self action:@selector(messageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.messageButton setTitle:@"Send Message" forState:UIControlStateNormal];
         

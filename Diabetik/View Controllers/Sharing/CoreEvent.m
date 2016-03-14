@@ -9,9 +9,9 @@
 #import "CoreEvent.h"
 
 @implementation CoreEvent
-@synthesize eventCategory, eventName, eventTimestamp, eventNotes, eventMedicineAmount, eventMedicineType, eventReadingValue, eventMealAmount, eventActivityTime, eventmessage;
+@synthesize eventCategory, eventName, eventTimestamp, eventNotes, eventMedicineAmount, eventMedicineType, eventReadingValue, eventMealAmount, eventActivityTime, eventmessage, eventDetails;
 
--(id) initWitheventCategory : (NSString *) eCategory andeventName: (NSString *) eName andeventTimestamp: (NSString *) eTimestamp andeventNotes: (NSString *) eNotes andeventMedicineAmount: (NSNumber *) eMedicineAmount andeventMedicineType: (NSString *) eMedicineType andeventReadingValue: (NSNumber *) eReadingValue andeventMealAmount: (NSNumber *) eMealAmount andeventActivityTime: (NSNumber *) eActivityTime
+-(id) initWitheventCategory : (NSString *) eCategory andeventName: (NSString *) eName andeventTimestamp: (NSString *) eTimestamp andeventNotes: (NSString *) eNotes andeventMedicineAmount: (NSNumber *) eMedicineAmount andeventMedicineType: (NSString *) eMedicineType andeventReadingValue: (NSNumber *) eReadingValue andeventMealAmount: (NSNumber *) eMealAmount andeventActivityTime: (NSNumber *) eActivityTime andeventDetails: (NSString *)eDetails
 {
     self = [super init];
     if (self)
@@ -25,6 +25,7 @@
         eventReadingValue = eReadingValue;
         eventMealAmount = eMealAmount;
         eventActivityTime = eActivityTime;
+        eventDetails = eDetails;
     }
     
     return self;

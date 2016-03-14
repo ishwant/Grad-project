@@ -8,6 +8,8 @@
 
 #import "ShareMessageViewController.h"
 #import "MainShareController.h"
+#import "MessageCell.h"
+
 
 static NSString* const kBaseURL = @"http://localhost:8080";
 
@@ -26,6 +28,13 @@ static NSString* const kBaseURL = @"http://localhost:8080";
                                              action:nil];
     NSLog(@"ShareMessageViewController loading");
     self.title = @"Send Message";
+    
+    UIBarButtonItem *sendMessageButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"SEND"
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(sendMessageButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = sendMessageButton;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -33,13 +42,14 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 55;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 340;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 1;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -49,30 +59,34 @@ static NSString* const kBaseURL = @"http://localhost:8080";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    if (indexPath.row == 0){
-        
-        self.textMessageField = [[UITextField alloc] initWithFrame:CGRectMake(65, 20, 200, 30)];
-        self.textMessageField.placeholder = @"Type message here.... ";
+ //   if (indexPath.row == 0){
+    
+        self.textMessageField = [[UITextView alloc] initWithFrame:CGRectMake(65, 20, 200, 300)];
+    //    self.textMessageField.placeholder = @"Type message here.... ";
         self.textMessageField.autocorrectionType = UITextAutocorrectionTypeNo;
-        [self.textMessageField setBorderStyle:UITextBorderStyleRoundedRect];
-        [self.textMessageField setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self.textMessageField setUserInteractionEnabled:YES];
+        self.textMessageField.layer.borderWidth = 1.0f;
+        self.textMessageField.layer.cornerRadius = 5;
+        self.textMessageField.layer.borderColor = [[UIColor grayColor] CGColor];
+   //     [self.textMessageField setBorderStyle:UITextBorderStyleRoundedRect];
+    //    [self.textMessageField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cell addSubview:self.textMessageField];
-    }
-    if (indexPath.row == 1){
-        
-        self.sendMessageButton = [[UIButton alloc] initWithFrame:CGRectMake(65,20,200,30)];
-        [self.sendMessageButton setBackgroundColor:[UIColor grayColor]];
-        [self.sendMessageButton addTarget:self action:@selector(sendMessageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [self.sendMessageButton setTitle:@"Send Message" forState:UIControlStateNormal];
-        
-        [cell addSubview:self.sendMessageButton];
-    }
+ //   }
+//    if (indexPath.row == 1){
+//        
+//        self.sendMessageButton = [[UIButton alloc] initWithFrame:CGRectMake(65,20,200,30)];
+//        [self.sendMessageButton setBackgroundColor:[UIColor grayColor]];
+//        [self.sendMessageButton addTarget:self action:@selector(sendMessageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.sendMessageButton setTitle:@"Send Message" forState:UIControlStateNormal];
+//        
+//        [cell addSubview:self.sendMessageButton];
+//    }
     [cell setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f]];
     return cell;
 }
