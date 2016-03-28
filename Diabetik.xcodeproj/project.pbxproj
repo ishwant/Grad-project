@@ -316,7 +316,6 @@
 		116EBAA31C9218BB00956106 /* detailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailTableViewController.m; path = Sharing/detailTableViewController.m; sourceTree = "<group>"; };
 		116EBAA51C9632A100956106 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = Sharing/MessageCell.h; sourceTree = "<group>"; };
 		116EBAA61C9632A100956106 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = Sharing/MessageCell.m; sourceTree = "<group>"; };
-		116EBAAE1C9672DF00956106 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		117FC8061C49958A006E92BE /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareViewController.xib; path = Sharing/ShareViewController.xib; sourceTree = "<group>"; };
 		117FC8071C49958A006E92BE /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = Sharing/ShareViewController.m; sourceTree = "<group>"; };
 		117FC8081C49958A006E92BE /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Sharing/ShareViewController.h; sourceTree = "<group>"; };
@@ -1058,7 +1057,6 @@
 		533F324F1773266600AD89E2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				116EBAAE1C9672DF00956106 /* Reachability.h */,
 				117FC7491C436A43006E92BE /* Sharing */,
 				118906DE1C14237B00F61D1B /* Login */,
 				53EABCD118B3D8A3001C5C39 /* Summary */,
@@ -2257,7 +2255,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2295,7 +2293,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2333,7 +2331,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2407,7 +2405,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
@@ -2521,7 +2519,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
@@ -2561,7 +2559,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
+				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "7AACABAB-E863-457D-B437-1F6455ACE09B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AACABAB-E863-457D-B437-1F6455ACE09B";

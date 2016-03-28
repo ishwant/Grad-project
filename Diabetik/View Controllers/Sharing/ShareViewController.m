@@ -320,10 +320,10 @@ static NSString* const kBaseURL = @"http://localhost:8080";
     else{
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Alert"
-                                  message:@"Want to send some message?"
+                                  message:@"Do you want to send a message to your Case Worker?"
                                   delegate:self
                                   cancelButtonTitle:@"Cancel"
-                                  otherButtonTitles:@"YES", @"NO",nil];
+                                  otherButtonTitles:@"Send a message with entries", @"Just send journal entries",nil];
         alertView.tag = 4;
         [alertView show];
     }
