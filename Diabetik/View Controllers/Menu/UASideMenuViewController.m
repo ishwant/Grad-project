@@ -300,15 +300,15 @@
             {
              //   SelectPostViewController *vc = [[SelectPostViewController alloc] initWithNibName:@"SelectPostViewController" bundle:nil];
 
-                 Reachability *netReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
-
-                NetworkStatus netStatus = [netReach currentReachabilityStatus];
-                NSLog(@"netStatus %ld", (long)netStatus);
-                if (netStatus==NotReachable) {
-                    NSLog(@"Not reachable, aww :-(");
-                } else {
-                    NSLog(@"Reachable");
-                }
+//                 Reachability *netReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
+//
+//                NetworkStatus netStatus = [netReach currentReachabilityStatus];
+//                NSLog(@"netStatus %ld", (long)netStatus);
+//                if (netStatus==NotReachable) {
+//                    NSLog(@"Not reachable, aww :-(");
+//                } else {
+//                    NSLog(@"Reachable");
+//                }
                 MainShareController *vc = [[MainShareController alloc] init];
                 [navigationController pushViewController:vc animated:animateViewControllerChange];
             }

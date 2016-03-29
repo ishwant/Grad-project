@@ -2255,7 +2255,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik.Widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2293,7 +2293,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik.Widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2331,7 +2331,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik.Widget;
 				PRODUCT_NAME = "com.uglyapps.diabetik.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -2405,7 +2405,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
@@ -2519,7 +2519,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1D0F2E3C-24ED-4DED-A809-96358E2E2455";
@@ -2559,7 +2559,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.globaltolocal.g2lbuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uglyapps.diabetik;
 				PRODUCT_NAME = Diabetik;
 				PROVISIONING_PROFILE = "7AACABAB-E863-457D-B437-1F6455ACE09B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AACABAB-E863-457D-B437-1F6455ACE09B";
