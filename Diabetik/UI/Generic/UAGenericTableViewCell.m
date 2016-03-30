@@ -37,7 +37,7 @@
         
         UIImageView *selectedBackground = [[UIImageView alloc] initWithFrame:self.bounds];
         selectedBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        selectedBackground.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:211.0f/255.0f blue:160.0f/255.0f alpha:1.0f];
+        selectedBackground.backgroundColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         self.selectedBackgroundView = selectedBackground;
         
         self.textLabel.backgroundColor = [UIColor clearColor];

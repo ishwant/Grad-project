@@ -81,7 +81,7 @@
         
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(floorf(pickerFrame.origin.x + pickerFrame.size.width - 150.0f - 17.0f), floorf(pickerFrame.origin.y + pickerFrame.size.height - (41.0f + 19.0f)), 150.0f, 41.0f)];
         [[doneButton titleLabel] setFont:[UAFont standardMediumFontWithSize:19.0f]];
-        [doneButton setTitleColor:[UIColor colorWithRed:0.0f green:192.0f/255.0f blue:180.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+        [doneButton setTitleColor:[UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1] forState:UIControlStateNormal];
         [doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(selectDate) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundColor:[UIColor whiteColor]];

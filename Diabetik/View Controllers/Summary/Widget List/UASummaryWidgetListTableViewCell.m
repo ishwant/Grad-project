@@ -28,7 +28,7 @@
         self.backgroundView.backgroundColor = [UIColor clearColor];
         
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.textColor = [UIColor colorWithRed:0.0f/255.0f green:182.0f/255.0f blue:165.0f/255.0f alpha:1.0f];
+        self.textLabel.textColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         self.textLabel.font = [UAFont standardBoldFontWithSize:16.0f];
         self.detailTextLabel.textAlignment = NSTextAlignmentCenter;
         self.detailTextLabel.textColor = [UIColor colorWithRed:108.0f/255.0f green:111.0f/255.0f blue:111.0f/255.0f alpha:1.0f];
@@ -70,7 +70,7 @@
     {
         self.buttonView.backgroundColor = [UIColor clearColor];
         
-        self.textLabel.textColor = [UIColor colorWithRed:0.0f/255.0f green:182.0f/255.0f blue:165.0f/255.0f alpha:1.0f];
+        self.textLabel.textColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         self.detailTextLabel.textColor = [UIColor colorWithRed:108.0f/255.0f green:111.0f/255.0f blue:111.0f/255.0f alpha:1.0f];
     }
 }
@@ -89,7 +89,7 @@
     {
         self.buttonView.backgroundColor = [UIColor clearColor];
         
-        self.textLabel.textColor = [UIColor colorWithRed:0.0f/255.0f green:182.0f/255.0f blue:165.0f/255.0f alpha:1.0f];
+        self.textLabel.textColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         self.detailTextLabel.textColor = [UIColor colorWithRed:108.0f/255.0f green:111.0f/255.0f blue:111.0f/255.0f alpha:1.0f];
     }
 }

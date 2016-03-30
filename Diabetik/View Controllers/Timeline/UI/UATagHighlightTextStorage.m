@@ -74,7 +74,7 @@
     
 	[regex enumerateMatchesInString:self.string options:0 range:paragraphRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         NSString *tagValue = [[self.string substringWithRange:result.range] stringByReplacingOccurrencesOfString:@"#" withString:@""];
-		[self addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.0f green:192.0f/255.0f blue:180.0f/255.0f alpha:1.0f] range:result.range];
+		[self addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1] range:result.range];
         [self addAttribute:@"tag" value:tagValue range:result.range];
 	}];
     

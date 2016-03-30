@@ -57,8 +57,8 @@
         
         pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
         pageControl.numberOfPages = totalPages;
-        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:18.0f/255.0f green:185.0f/255.0f blue:139.0f/255.0f alpha:1.0f];
-        pageControl.pageIndicatorTintColor = [UIColor colorWithRed:18.0f/255.0f green:185.0f/255.0f blue:139.0f/255.0f alpha:0.25f];
+        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
+        pageControl.pageIndicatorTintColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         [self addSubview:pageControl];
     }
     return self;
@@ -96,7 +96,7 @@
     
     UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(floorf(self.frame.size.width/2 - 200/2), 0, 200, headerHeight)];
     header.backgroundColor = [UIColor clearColor];
-    header.textColor = [UIColor colorWithRed:18.0f/255.0f green:185.0f/255.0f blue:139.0f/255.0f alpha:1.0f];
+    header.textColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
     header.numberOfLines = 1;
     header.textAlignment = NSTextAlignmentCenter;
     header.font = [UAFont standardBoldFontWithSize:26.0f];

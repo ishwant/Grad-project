@@ -129,7 +129,7 @@
         lowGlucoseDetailLabel.text = @"0";
         lowGlucoseDetailLabel.font = [UAFont standardRegularFontWithSize:13.0f];
         lowGlucoseDetailLabel.textAlignment = NSTextAlignmentLeft;
-        lowGlucoseDetailLabel.textColor = [UIColor colorWithRed:0.0f/255.0f green:192.0f/255.0f blue:180.0f/255.0f alpha:1.0f];
+        lowGlucoseDetailLabel.textColor = [UIColor colorWithRed:(83/255.0) green:(145/255.0) blue:(198/255.0) alpha:1];
         lowGlucoseDetailLabel.highlightedTextColor = [UIColor whiteColor];
         [self.contentView addSubview:lowGlucoseDetailLabel];
         
